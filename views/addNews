@@ -1,0 +1,51 @@
+<div class="row">
+        <div class="col-md-12">
+        
+            <h2>Add News</h2>
+  
+            <br />
+    
+            <form method="post" action="/news/add" enctype="multipart/form-data">
+    
+                <fieldset>
+                    <legend>Feature Image</legend>
+                    <hr />
+                      <div class="mb-2 row">
+                            <div class="form-group">
+                                <input class="form-control" id="featureImage" name="featureImage" type="file" />
+                            </div>
+                      </div>
+                </fieldset>
+                <br />
+                <fieldset>
+                  <legend>News Content</legend>
+                    <hr />
+                        <div class="mb-2 row">
+                            <div class="form-group">
+                                <label for="title">Title:</label>
+                                <input class="form-control" id="title" name="title" type="text" />
+                            </div>
+                        </div>
+                        <div class="mb-2 row">
+                            <div class="form-group">
+                                <label for="brief">Brief description:</label>
+                                <input class="form-control" id="bried" name="brief" type="text" />
+                            </div>
+                        </div>
+                          <div class="mb-3 row">
+                            <div class="form-group">
+                                <label for="body">Body:</label>
+                               <textarea class="form-control" id="body" name="body" rows=15></textarea>
+                            </div>
+                            </div>
+                        
+                    </div>
+    
+                </fieldset>
+    
+                <hr />
+    
+                <input type="submit" class="btn btn-outline-primary float-end" value="Add News" /><br /><br /><br />
+    
+            </form>
+      </div>

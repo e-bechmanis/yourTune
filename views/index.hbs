@@ -1,27 +1,31 @@
 <div class="container">
   </br>
   <div class="row">
-    <a href="/albums/new" class="btn btn-light">Add Album</a>
-    {{#each data}}
-    <div class="col-sm-6">
+    <a href="/albums" class="see-all">SEE ALL ALBUMS</a>
+    
       </br>
-      <div class="card">
+    <div class="card-group">
+      
+    {{#each data}}
+    
+       <div class="card">
         <img src="{{albumCover}}" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">{{title}}</h5>
-          <h6 class="card-title">{{artist}}</h6>
-          <p class="card-text">{{year}}</p>
-          <a href="/songs/{{albumID}}" class="btn btn-primary">Songs</a>
+          <h6 class="card-subtitle mb-2 text-muted">{{artist}}</h6>
+          <p class="text-muted">{{year}}</p>
+          <div class="card-footer">
+          <a href="/songs/{{albumID}}" class="btn btn-outline-secondary btn-sm">Songs</a>
           {{#if genreID}}
-          <a href="/albums?genre={{genreID}}" class="btn btn-warning">{{genreID}}</a>
+          <a href="/albums?genre={{genreID}}" class="btn btn-secondary btn-sm">{{genre}}</a>
           {{/if}}
-          <a href="/albums/delete/{{albumID}}" class="btn btn-danger">Delete</a>
-
-          {{!-- <a href="/music/stronger.mp3" class="btn btn-success">Play</a> --}}
+          </div>
+          </div>
         </div>
-      </div>
-    </div>
+      
     {{/each}}
+  
+  </div>
   </div>
   {{#unless data}}
       <div class="col-md-12 text-center">

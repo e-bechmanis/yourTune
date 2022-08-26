@@ -1,0 +1,12 @@
+
+.navbar{
+    margin-bottom: 0;
+}
+
+body{
+    background: linear-gradient(135deg, #fefefe 0%, #dcdcdc 100%);
+}
+
+.card{
+    height: 400px;
+}

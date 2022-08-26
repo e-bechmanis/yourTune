@@ -88,12 +88,42 @@ const upload = multer(); // no { storage: storage } since we are not using disk 
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
- let albumsData = await musicService.getAlbums()//.then((albumsData) => console.log(albumsData))
-  res.render('index', {
-    data: albumsData,
-    layout: 'main'
+  res.redirect('/home');
 })
-})
+
+app.get("/home", async (req, res) => {
+  // Declare an object to store properties for the view
+  let viewData = {};
+  try{
+    // declare empty array to hold "news" objects
+    let allnews = [];
+    allnews = await newsService.getAllNews();
+    // sort the news by newsDate
+    allnews.sort((a,b) => new Date(b.newsDate) - new Date(a.newsDate));
+    // get the latest news from the front of the list (first 5 elements)
+    let news = allnews; 
+    // store the news data in the viewData object (to be passed to the view)
+    viewData.allnews = news;
+  }  catch(err){
+    viewData.message = 'no results';
+  }
+  try{
+    // Obtain the full list of "genres"
+    let genres = await musicService.getGenres();
+    // store the "categories" data in the viewData object (to be passed to the view)
+    viewData.genres = genres;
+  }catch(err){
+    viewData.genresMessage = 'no results';
+  }
+    let albumsData = await musicService.getAlbums()
+    viewData.albums = albumsData.slice(0, 5); //only require first 5 albums to display
+    let podcasts = await musicService.getAlbumsByGenre(7)
+    viewData.podcasts = podcasts.slice(0, 5); //only require first 5 podcasts to display
+    console.log(viewData)
+    res.render('index', {
+      data: viewData
+ })
+ })
 
 app.get("/albums/new", ensureLogin, (req, res) => {
   musicService.getGenres().then((genres) => {
@@ -104,7 +134,7 @@ app.get("/albums/new", ensureLogin, (req, res) => {
   })
 })
 
-app.get("/albums", ensureLogin, (req, res) => {
+app.get("/albums", (req, res) => {
   if (req.query.genre) {
     musicService.getAlbumsByGenre(req.query.genre).then((genreAlbumsData) => {
       res.render('albums', {
@@ -190,7 +220,7 @@ app.post("/albums/new", ensureLogin, upload.single("albumCover"), (req, res) => 
 })
 
 
-app.get("/genres", ensureLogin, (req, res) => {
+app.get("/genres", (req, res) => {
   musicService.getGenres().then((genres) => {
     res.render('genres', {
       data: genres,

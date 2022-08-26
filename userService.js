@@ -28,14 +28,15 @@ module.exports.initialize = function () {
       reject(err) // reject the promise with the provided error
     })
     db.once('open', () => {
-      User = db.model("users", userSchema)
+      User = db.model("musicapp", userSchema)
       console.log("MONGO DB CONNECTED!")
       resolve()
     })
   })
 }
 
-module.exports.registerUser = function (userData) {
+module.exports.registerUser = (userData) => {
+  console.log(userData);
   return new Promise((resolve, reject) => {
     if (userData.password != userData.password2) {
       reject("PASSWORDS DO NOT MATCH!")
@@ -48,7 +49,7 @@ module.exports.registerUser = function (userData) {
             if(err.code == 11000) {
               reject("USERNAME TAKEN!")
             } else {
-              reject("ERROR: "+err)
+              reject("ERROR: "+ err)
             }
           } else {
             console.log("success")
@@ -72,7 +73,7 @@ module.exports.loginUser = function(userData) {
       } else {
         bcryptjs.compare(userData.password, user.password).then((result) => {
           if (result === true) {
-            // save session stuff
+            // save session 
             console.log(user)
             user.loginHistory.push({dateTime: new Date(), userAgent: userData.userAgent})
             

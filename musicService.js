@@ -55,7 +55,7 @@ module.exports.initialize = () => {
           console.log("POSTGRES CONNECTION HAS BEEN MADE SUCCESSFULLY!")
           resolve()
         }).catch((err) => {
-          console.log("POSTGRES CONNECTION FAILED, ERROR: "+err)
+          console.log("POSTGRES CONNECTION FAILED, ERROR: "+ err)
         })
     })
 

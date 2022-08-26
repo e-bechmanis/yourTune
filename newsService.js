@@ -50,6 +50,7 @@ module.exports.addNews = (newsData) => {
             }
         }
         newsData.newsDate = new Date();
+        console.log(newsData);
         News.create(newsData).then(() => { resolve()})
         .catch((err) => reject("Unable to create post"));
         });    

@@ -9,8 +9,10 @@ const clientSessions = require("client-sessions")
 const path = require("path")
 const musicService = require("./musicService")
 const userService = require("./userService")
+const newsService = require("./newsService")
 
 const multer = require("multer");
+const stripJs = require('strip-js');
 const cloudinary = require('cloudinary').v2
 const streamifier = require('streamifier')
 
@@ -23,7 +25,33 @@ cloudinary.config({
 
 const exphbs = require('express-handlebars')
 app.engine('.hbs', exphbs.engine({
-  extname: '.hbs'
+  extname: '.hbs',
+  defaultLayout: 'main',
+  helpers: {
+    //automatically renders the correct <li> element adding the class "active" if app.locals.activeRoute matches the provided url
+    navLink: function(url, options){
+        return '<li class="nav-item"><a class="btn btn-outline-secondary me-2 ' + ((url == app.locals.activeRoute) ? 'active" aria-current="page"' : '"') + ' href="' + url + '">' + options.fn(this) + '</a></li>';
+    },
+    //evaluates conditions for equality
+    equal: function (lvalue, rvalue, options) {
+        if (arguments.length< 3)
+            throw new Error("Handlebars Helper equal needs 2 parameters");
+        if (lvalue != rvalue) {
+            return options.inverse(this);
+        } else {
+            return options.fn(this);
+        }
+    },
+    safeHTML: function(context){
+        return stripJs(context);
+    },
+    formatDate: function(dateObj){
+        let year = dateObj.getFullYear();
+        let month = (dateObj.getMonth() + 1).toString();
+        let day = dateObj.getDate().toString();
+        return `${year}-${month.padStart(2, '0')}-${day.padStart(2,'0')}`;
+    }    
+  }
 }))
 app.set('view engine', '.hbs')
 
@@ -317,6 +345,81 @@ app.post("/login", (req, res) => {
   })
 })
 
+app.get('/news', async (req, res) => {
+  // Declare an object to store properties for the view
+  let viewData = {};
+  try{
+      // declare empty array to hold "news" objects
+      let allnews = [];
+      allnews = await newsService.getAllNews();
+      // sort the news by newsDate
+      allnews.sort((a,b) => new Date(b.newsDate) - new Date(a.newsDate));
+      // get the latest news from the front of the list (element 0)
+      let news = allnews[0]; 
+      // store the "all news" and "news" data in the viewData object (to be passed to the view)
+      viewData.allnews = allnews;
+      viewData.news = news;
+
+  }catch(err){
+      viewData.message = 'no results';
+  }
+  // render the "news" view with all of the data (viewData)
+  res.render('news', {data: viewData})
+});
+
+// Renders "Add news" view
+//, ensureLogin
+app.get('/news/add', (req,res) => {
+  res.render('addNews')
+});
+
+//, ensureLogin
+app.post('/news/add', upload.single('featureImage'), (req,res) => {
+  if(req.file){
+      let streamUpload = (req) => {
+          return new Promise((resolve, reject) => {
+              let stream = cloudinary.uploader.upload_stream(
+                  (error, result) => {
+                      if (result) {
+                          resolve(result);
+                      } else {
+                          reject(error);
+                      }
+                  }
+              );
+  
+  streamifier.createReadStream(req.file.buffer).pipe(stream);
+          });
+      };
+  
+      async function upload(req) {
+          let result = await streamUpload(req);
+          console.log(result);
+          return result;
+      }
+  
+      upload(req).then((uploaded)=>{
+  processNews(uploaded.url);
+      });
+  }else{
+  processNews("");
+  }
+  
+  function processNews(imageUrl){
+  req.body.featureImage = imageUrl;
+
+  // Process the req.body and add it as a new News before redirecting to /news
+  newsService.addNews(req.body).then(()=>res.redirect('/news'));
+  }     
+});
+
+//Deletes news by ID
+app.get('/news/delete/:id', ensureLogin, (req,res) => {
+  newsService.deleteNewsById(req.params.id).then(()=>res.redirect('/news'))
+  .catch((error) => res.status(500).send('Unable to Remove News / News not found'));
+});
+
+
 app.get("/loginHistory", ensureLogin, (req, res) => {
   res.render('loginHistory')
 })
@@ -327,7 +430,6 @@ app.get("/logout", ensureLogin, (req,res) => {
 })
 
 app.use((req, res) => {
-  // res.status(404).send("Page Not Found")
   res.render('404', {
     data: null,
     layout: 'main'
@@ -337,6 +439,7 @@ app.use((req, res) => {
 
 musicService.initialize()
 .then(userService.initialize())
+.then(newsService.initialize())
 .then(() => {
   app.listen(HTTP_PORT, onHttpStart)
 }).catch((err) => {

@@ -1,8 +1,3 @@
-const fs = require("fs")
-
-let albums = []
-let genres = []
-
 const env = require("dotenv")
 env.config()
 

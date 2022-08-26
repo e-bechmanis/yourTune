@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-fixed navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="/"><img src="/Free_Sample_By_Wix.jpg" height="70"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -14,9 +14,11 @@
 
     </div>
     {{#if session.user}}
-      <a class="btn btn-outline-dark my-2 my-sm-0" href="/loginHistory">{{session.user.username}}</a>
+      <a class="btn btn-outline-dark my-2 my-sm-0" href="/loginHistory"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+</svg> {{session.user.username}}</a>
     {{else}}
-      <a class="btn btn-outline-dark my-2 my-sm-0" href="/login">Login</a>
+      <a class="btn btn-outline-danger my-2 my-sm-0" href="/login">Login</a>
     {{/if}}
   </div>
 </nav>

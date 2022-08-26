@@ -79,7 +79,7 @@ app.get("/albums/new", ensureLogin, (req, res) => {
 app.get("/albums", ensureLogin, (req, res) => {
   if (req.query.genre) {
     musicService.getAlbumsByGenre(req.query.genre).then((genreAlbumsData) => {
-      res.render('index', {
+      res.render('albums', {
         data: genreAlbumsData,
         layout: 'main'
       })
@@ -89,7 +89,7 @@ app.get("/albums", ensureLogin, (req, res) => {
   } else {
     musicService.getAlbums().then((albumsData) => {
       console.log(albumsData)
-      res.render('index', {
+      res.render('albums', {
         data: albumsData,
         layout: 'main'
       })

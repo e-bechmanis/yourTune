@@ -1,0 +1,36 @@
+<div class="container-xl">
+    <div class="row">
+    
+        <a href="/news/add" class="btn btn-light">Add News</a>
+    <section class="main col-md-9">
+        {{#if data.news}}
+            <article>
+                <h2 class="news-title">{{data.news.title}}</h2>
+                <hr/>
+                <div class="brief-text"><strong>Last updated:</strong> {{#formatDate data.news.newsDate}}{{/formatDate}}</div>
+                <br>
+                <img src="{{data.news.featureImage}}" alt="feature Image" style="width:100%" />
+                <br /><br />
+                {{#safeHTML data.news.body}}{{/safeHTML}}
+                <br /><br />
+            </article>
+        {{else}}
+            <div class="col-md-12 text-center">
+            <h2>{{data.message}}</h2>
+            <p>No news have been added yet</p>
+            </div>
+        {{/if}}
+    </section>
+    <aside class="col-md-3">
+        <br /><br />
+        {{#if data.allnews}}
+            <div class="news-side"><h5>More news worth reading</h5></div>
+            <ul class="list-group">
+                {{#each data.allnews}}
+                    <a href="/news/{{id}}" class="list-group-item list-group-item-action">{{title}}<div class="text-muted">{{brief}}</div></a>
+                {{/each}}
+            </ul>
+        {{/if}}
+    </aside>
+  </div>
+</div>

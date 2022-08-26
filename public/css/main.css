@@ -1,4 +1,6 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
 .navbar{
     margin-bottom: 0;
 }
@@ -9,4 +11,25 @@ body{
 
 .card{
     height: 400px;
+}
+
+.news-side{
+    text-align: center;
+    font-family: 'Noto Serif', serif;
+    font-weight: 400;
+    color: rgb(116, 31, 31);
+}
+
+.news-title{
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
+    color: rgb(72, 71, 71);
+}
+
+.brief-text{
+    font-family: 'Noto Serif', serif;
+    font-weight: 400;
+    color: rgb(118, 118, 118);
+    font-size: 14px;
+    float: right;
 }

@@ -23,24 +23,21 @@ cloudinary.config({
 
 const exphbs = require('express-handlebars')
 app.engine('.hbs', exphbs.engine({
-  extname: '.hbs',
-  // defaultLayout: 'main',
-  // layoutsDir: 'views/layouts',
-  // partialsDir: 'views/partials'
+  extname: '.hbs'
 }))
 app.set('view engine', '.hbs')
 
 const HTTP_PORT = process.env.PORT || 8080
 
 function onHttpStart() {
-  console.log("Express Server is running on PORT: " + HTTP_PORT + " 🚀🚀🚀")
+  console.log("Express Server is running on PORT: " + HTTP_PORT + " 🚀")
 }
 
 app.use(express.static("public"));
 
 app.use(clientSessions({
   cookieName: "session",
-  secret: "week12notifymusicappexample12308052022",
+  secret: "yourTuneMusicApp25082022clientSessions",
   duration: 2 * 60 * 1000,
   activeDuration: 60 * 1000
 }))
@@ -62,10 +59,21 @@ const upload = multer(); // no { storage: storage } since we are not using disk 
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  // res.sendFile(path.join(__dirname, "/views/index.html"))
-  res.redirect("/albums")
-  // res.json("nice!")
+app.get("/", async (req, res) => {
+ let albumsData = await musicService.getAlbums()//.then((albumsData) => console.log(albumsData))
+  res.render('index', {
+    data: albumsData,
+    layout: 'main'
+})
+})
+
+app.get("/albums/new", ensureLogin, (req, res) => {
+  musicService.getGenres().then((genres) => {
+    res.render('albumForm', {
+      data: genres,
+      layout: 'main'
+    })
+  })
 })
 
 app.get("/albums", ensureLogin, (req, res) => {
@@ -92,8 +100,6 @@ app.get("/albums", ensureLogin, (req, res) => {
 })
 
 app.get("/albums/new", ensureLogin, (req, res) => {
-  // res.render('albumForm')
-
   musicService.getGenres().then((genres) => {
     res.render('albumForm', {
       data: genres,
@@ -108,7 +114,6 @@ app.get("/albums/:id", ensureLogin, (req, res) => {
       data: album,
       layout: 'main'
     })
-    // res.json(album)
   }).catch((err) => {
     res.json({ message: err })
   })

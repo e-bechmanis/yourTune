@@ -1,7 +1,9 @@
 <div class="container">
   </br>
   <div class="row">
+    {{#if session.user}}
     <a href="/genres/new" class="btn btn-light">Add Genre</a>
+     {{/if}}
     <div class="col-md-12">
       </br>
       <h2>Genres</h2>
@@ -11,7 +13,9 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Genres</th>
+            {{#if session.user}}
             <th scope="col">Delete</th>
+            {{/if}}
 
           </tr>
         </thead>

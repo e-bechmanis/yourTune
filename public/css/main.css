@@ -9,10 +9,6 @@ body{
     background: linear-gradient(135deg, #fefefe 0%, #dcdcdc 100%);
 }
 
-.card{
-    height: 400px;
-}
-
 .news-side{
     text-align: center;
     font-family: 'Noto Serif', serif;
@@ -32,4 +28,16 @@ body{
     color: rgb(118, 118, 118);
     font-size: 14px;
     float: right;
+}
+
+.container{
+   margin: 2rem;
+}
+
+.card-body span{
+    font-size: 14px;
+}
+
+.index{
+    
 }

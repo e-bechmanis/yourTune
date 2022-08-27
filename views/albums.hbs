@@ -1,7 +1,9 @@
 <div class="container">
   </br>
   <div class="row">
+    {{#if session.user}}
     <a href="/albums/new" class="btn btn-light">Add Album</a>
+    {{/if}}
     {{#each data}}
     <div class="col-sm-3">
       </br>

@@ -1,49 +1,86 @@
-<div class="container">
+<div class="container-fluid">
   </br>
-  <div class="row">
-    <a href="/albums" class="text-end text-muted">SEE ALL ALBUMS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-  <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-</svg></a>
-      <br/><br/>
     <div class="row">
-        
-    {{#each data}}
-    <div class="col-sm-2">
-       <div class="card">
-        <img src="{{albumCover}}" class="card-img-top">
-        <div class="card-body">
-          <h6 class="card-title">{{title}}</h6>
-          <h7 class="card-subtitle mb-2 text-muted">{{artist}}</h7>
-          <p class="text-muted">{{year}}</p>
-          <div class="card-footer mt-auto">
-          <a href="/songs/{{albumID}}" class="btn btn-outline-secondary btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
-  <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
-</svg> Songs</a>
-          {{#if genreID}}
-          <a href="/albums?genre={{genreID}}" class="btn btn-secondary btn-sm">{{genreID}}</a>
-          {{/if}}
+      <section class="main col-md-9">
+        <div class="row">
+      <a href="/albums" class="text-end text-muted">SEE ALL ALBUMS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+      </a>
+      
+        <br/><br/>
+        {{#each data.albums}}
+            <div class="col-md-2 float-end">
+              <div class="card">
+                <img src="{{albumCover}}" class="card-img-top">
+                  <div class="card-body">
+                      <span class="card-title">{{title}}</span><br>
+                      <span class="card-subtitle mb-2 text-muted">{{artist}}</span><br>
+                      <span class="text-muted">{{year}}</span>
+                        <div class="card-footer mt-auto">
+                            <a href="/songs/{{albumID}}" class="btn btn-outline-secondary btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                              <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                                </svg> Songs
+                            </a>
+                              {{#if genre}}
+                                <a href="/albums?genre={{genreID}}" class="btn btn-secondary btn-sm">{{genre}}</a>
+                              {{/if}}
+                          </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+
+        {{#unless data.albums}}
+          <div class="col-md-12 text-center">
+            <strong>NO RESULTS</strong>
           </div>
+        {{/unless}}
+        </br>
+        </div>
+        <hr/>
+        <br>
+       <div class="row">
+      <a href="/albums" class="text-end text-muted">SEE ALL PODCASTS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+      </a>
+      <br/><br/>
+        
+      {{#each data.podcasts}}
+        <div class="col-sm-2">
+          <div class="card">
+            <img src="{{albumCover}}" class="card-img-top">
+              <div class="card-body">
+                <h6 class="card-title">{{title}}</h6>
+                <h7 class="card-subtitle mb-2 text-muted">{{artist}}</h7>
+                <p class="text-muted">{{year}}</p>
+                  <div class="card-footer mt-auto">
+                    <a href="/songs/{{albumID}}" class="btn btn-outline-secondary btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                      <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                      </svg> Listen
+                    </a>
+                  </div>
+              </div>
           </div>
         </div>
-      </div>
-    {{/each}}
+      {{/each}}
   
-  </div>
-  </div>
-  {{#unless data}}
-      <div class="col-md-12 text-center">
-        <strong>NO RESULTS</strong>
-    </div>
-  {{/unless}}
-  <aside class="col-md-3">
-        <br /><br />
-        {{#if data.posts}}
-            <h4>Posts</h4>
+      {{#unless data.podcasts}}
+        <div class="col-md-12 text-center">
+          <strong>NO RESULTS</strong>
+        </div>
+      {{/unless}}
+      </div>
+</section>
+      <aside class="col-md-3 float-end">
+        
+        {{#if data.allnews}}
+          <div class="news-side"><h5>Music news</h5></div>
             <ul class="list-group">
-                {{#each data.posts}}
-                    <a href="/blog/{{id}}?category={{../viewingCategory}}" class="list-group-item list-group-item-action">{{title}}</a>
-                {{/each}}
+              {{#each data.allnews}}
+                <a href="/news/{{id}}" class="list-group-item list-group-item-action">{{title}}<div class="text-muted">{{brief}}</div></a>
+              {{/each}}
             </ul>
         {{/if}}
-    </aside>
+      </aside>
+  </div>
 </div>

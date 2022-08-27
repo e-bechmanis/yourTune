@@ -1,10 +1,12 @@
 <div class="container-xl">
     <div class="row">
-    
+    {{#if session.user}}
         <a href="/news/add" class="btn btn-light">Add News</a>
+    {{/if}}
     <section class="main col-md-9">
         {{#if data.news}}
             <article>
+                <br>
                 <h2 class="news-title">{{data.news.title}}</h2>
                 <hr/>
                 <div class="brief-text"><strong>Last updated:</strong> {{#formatDate data.news.newsDate}}{{/formatDate}}</div>

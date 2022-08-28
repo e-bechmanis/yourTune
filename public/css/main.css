@@ -38,6 +38,49 @@ body{
     font-size: 14px;
 }
 
-.index{
-    
+.mycard{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    flex-wrap: wrap;
+    margin-right: 15px;
+    margin-top: 10px;
+    color:rgb(29, 28, 28);
+    border-radius: 10px;
+    box-shadow: rgba(219, 244, 240, 0.2) 0 3px 5px -1px,rgba(219, 244, 240, .14) 0 6px 10px 0,rgba(219, 244, 240, .12) 0 1px 18px 0;
+}
+.mycard-img{
+    border-radius: 10px;
+}
+
+.line1, .line2, .line3{
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.line2{
+    opacity: 70%;
+}
+
+.line3{
+    opacity: 60%;
+}
+
+.cards-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.index-link{
+    text-decoration: none;
+    float: right;
+}
+
+.brief{
+    font-size: 14px;
+}
+
+.dropdown{
+    margin-right: 0.7rem;
 }

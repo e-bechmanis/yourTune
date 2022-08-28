@@ -10,16 +10,40 @@
         <a class="nav-link active" aria-current="page" href="/">Home</a>
         <a class="nav-link" href="/albums">Albums</a>
         <a class="nav-link" href="/podcasts">Podcasts</a>
-        <a class="nav-link" href="/genres">Genres</a>
         <a class="nav-link" href="/news">Blog & Music News</a>
       </div>
     </div>
     {{#if session.user}}
-      <a class="btn btn-outline-dark my-2 my-sm-0" href="/loginHistory"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-</svg> {{session.user.username}}</a>
-    {{else}}
-      <a class="btn btn-outline-danger my-2 my-sm-0" href="/login">Login</a>
-    {{/if}}
+          <div class="dropdown">
+             <button class="btn btn-outline-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Update Data</button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/genres/update">Update Genres</a></li>
+                <li><a class="dropdown-item" href="/albums/update">Update Albums</a></li>
+                <li><a class="dropdown-item" href="/songs/update">Update Songs</a></li>
+                <li><a class="dropdown-item" href="/news/update">Update News</a></li>
+              </ul>
+            </div>
+          <form class="navbar-form navbar-right">
+            
+            <div class="dropdown">
+             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+              </svg>&nbsp;&nbsp;{{session.user.username}}&nbsp;&nbsp;</button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/loginHistory">Login History</a></li>
+                <li><a class="dropdown-item text-danger" href="/logout">Log Out</a></li>
+              </ul>
+            </div>
+          </form>
+
+         
+          {{else}}
+          <form class="navbar-form navbar-right">
+            <a class="btn btn-outline-danger my-2 my-sm-0" href="/login">Sign In</a>
+          </form>
+          {{/if}}
+
   </div>
 </nav>

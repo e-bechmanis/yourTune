@@ -1,20 +1,19 @@
 <div class="container-fluid">
   </br>
-    <div class="row">
-      <section class="main col-md-9">
+    
+    <section class="main col-md-9 float-start">
+      <div class="row">
         <div class="index-link">
-      <a href="/albums" class="text-muted">SEE ALL ALBUMS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
-      </a>
-      </div>
-      <br>
-      <div class="cards-row">
-        <br/><br/>
-        {{#each data.albums}}
-            
-
+          <a href="/albums" class="text-muted">SEE ALL ALBUMS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+          </a>
+        </div>
+        <br>
+        <div class="cards-row">
+          <br/><br/>
+            {{#each data.albums}}
               <div class="mycard">
-                <img src="{{albumCover}}" class="mycard-img" width="216px">
+                <img src="{{albumCover}}" class="mycard-img" width="190px">
                   <div class="card-body">
                       <div class="line1">{{title}}</div>
                       <div class="line2">{{artist}}</div>
@@ -29,32 +28,31 @@
                               {{/if}}
                           </div>
                     </div>
-                </div>
+                </div>            
+            {{/each}}
 
-            
-        {{/each}}
-
-        {{#unless data.albums}}
-          <div class="col-md-12 text-center">
-            <strong>NO RESULTS</strong>
-          </div>
-        {{/unless}}
-        </br>
+            {{#unless data.albums}}
+              <div class="col-md-12 text-center">
+                <strong>NO RESULTS</strong>
+              </div>
+            {{/unless}}
+           </br>
         </div>
         <hr/>
         <br>
-       
-        <div class="index-link">
-      <a href="/albums" class="text-end text-muted">SEE ALL PODCASTS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
-      </a>
       </div>
-      <br/>
-        
-      {{#each data.podcasts}}
-        <div class="cards-row">
+
+      <div class="row">
+        <div class="index-link">
+          <a href="/albums" class="text-end text-muted">SEE ALL PODCASTS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+          </a>
+        </div>
+        <br/>
+      <div class="cards-row">
+        {{#each data.podcasts}}
           <div class="mycard">
-            <img src="{{albumCover}}" class="mycard-img" width="216px">
+            <img src="{{albumCover}}" class="mycard-img" width="190px">
               <div class="card-body">
                 <div class="line1">{{title}}</div>
                 <div class="line2">{{artist}}</div>
@@ -67,14 +65,15 @@
                   </div>
               </div>
           </div>
-        </div>
       {{/each}}
-  
+      
       {{#unless data.podcasts}}
         <div class="col-md-12 text-center">
           <strong>NO RESULTS</strong>
         </div>
       {{/unless}}
+      </div>
+      <br>
       </div>
 </section>
       <aside class="col-md-3 float-end">
@@ -83,10 +82,9 @@
           <div class="news-side"><h5>Music news</h5></div>
             <ul class="list-group">
               {{#each data.allnews}}
-                <a href="/news/{{id}}" class="list-group-item list-group-item-action">{{title}}<div class="text-muted">{{brief}}</div></a>
+                <a href="/news/{{id}}" class="list-group-item list-group-item-action">{{title}}<div class="text-muted brief">{{brief}}</div></a>
               {{/each}}
             </ul>
         {{/if}}
       </aside>
-  </div>
 </div>

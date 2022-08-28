@@ -2,21 +2,24 @@
   </br>
     <div class="row">
       <section class="main col-md-9">
-        <div class="row">
-      <a href="/albums" class="text-end text-muted">SEE ALL ALBUMS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+        <div class="index-link">
+      <a href="/albums" class="text-muted">SEE ALL ALBUMS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
         <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
       </a>
-      
+      </div>
+      <br>
+      <div class="cards-row">
         <br/><br/>
         {{#each data.albums}}
-            <div class="col-md-2 float-end">
-              <div class="card">
-                <img src="{{albumCover}}" class="card-img-top">
+            
+
+              <div class="mycard">
+                <img src="{{albumCover}}" class="mycard-img" width="216px">
                   <div class="card-body">
-                      <span class="card-title">{{title}}</span><br>
-                      <span class="card-subtitle mb-2 text-muted">{{artist}}</span><br>
-                      <span class="text-muted">{{year}}</span>
-                        <div class="card-footer mt-auto">
+                      <div class="line1">{{title}}</div>
+                      <div class="line2">{{artist}}</div>
+                      <div class="line3">{{year}}</div>
+                        <div class="mycard-footer">
                             <a href="/songs/{{albumID}}" class="btn btn-outline-secondary btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
                               <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
                                 </svg> Songs
@@ -27,7 +30,8 @@
                           </div>
                     </div>
                 </div>
-            </div>
+
+            
         {{/each}}
 
         {{#unless data.albums}}
@@ -39,21 +43,23 @@
         </div>
         <hr/>
         <br>
-       <div class="row">
+       
+        <div class="index-link">
       <a href="/albums" class="text-end text-muted">SEE ALL PODCASTS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
         <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
       </a>
-      <br/><br/>
+      </div>
+      <br/>
         
       {{#each data.podcasts}}
-        <div class="col-sm-2">
-          <div class="card">
-            <img src="{{albumCover}}" class="card-img-top">
+        <div class="cards-row">
+          <div class="mycard">
+            <img src="{{albumCover}}" class="mycard-img" width="216px">
               <div class="card-body">
-                <h6 class="card-title">{{title}}</h6>
-                <h7 class="card-subtitle mb-2 text-muted">{{artist}}</h7>
-                <p class="text-muted">{{year}}</p>
-                  <div class="card-footer mt-auto">
+                <div class="line1">{{title}}</div>
+                <div class="line2">{{artist}}</div>
+                <div class="line3">{{year}}</div>
+                  <div class="mycard-footer">
                     <a href="/songs/{{albumID}}" class="btn btn-outline-secondary btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
                       <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
                       </svg> Listen

@@ -2,21 +2,24 @@
   </br>
     <div class="row">
       <div class="col-md-12">
-        <h2>Genres <a href="/genres/new" class="btn btn-outline-success float-end">Add Genre</a></h2>
-          <div class="table-responsive">
+        <h2>News <a href="/news/new" class="btn btn-outline-success float-end">Add News</a></h2>
+          <hr />
+            <div class="table-responsive">
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Genre ID</th>
-                    <th>Genre</th>
+                    <th>News ID</th>
+                    <th>Title</th>
+                    <th>News Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   {{#each data}}
                     <tr>
-                      <td>{{genreID}}</td>
-                      <td><a class="btn btn-warning" href="/albums?genre={{genreID}}">{{genre}}</a></td>
-                      <td><a class="btn btn-outline-danger" href="/genres/delete/{{genreID}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                      <td>{{id}}</td>
+                      <td>{{title}}</td>
+                      <td>{{#formatDate newsDate}}{{/formatDate}}</td>
+                      <td><a class="btn btn-outline-danger" href="/news/delete/{{id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                           <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                           </svg>&nbsp;&nbsp;Delete</a></td>
@@ -24,13 +27,13 @@
                   {{/each}}
                 </tbody>
               </table>
-          </div>
+            </div>
+        </div>
       </div>
-  </div>
 
   {{#unless data}}
     <div class="col-md-12 text-center">
-      <strong>{{message}}</strong>
-    </div>
+       <strong>{{message}}</strong>
+     </div>
   {{/unless}}
 </div>

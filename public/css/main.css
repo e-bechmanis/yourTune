@@ -43,12 +43,17 @@ body{
     flex-direction: column;
     width: 200px;
     flex-wrap: wrap;
-    margin-right: 15px;
+    
     margin-top: 10px;
     color:rgb(29, 28, 28);
     border-radius: 10px;
-    box-shadow: rgba(219, 244, 240, 0.2) 0 3px 5px -1px,rgba(219, 244, 240, .14) 0 6px 10px 0,rgba(219, 244, 240, .12) 0 1px 18px 0;
+    
 }
+
+.mycard-img:hover{
+    box-shadow: rgba(142, 146, 145, 0.2) 0 3px 5px -1px,rgba(142, 146, 145, .14) 0 6px 10px 0,rgba(142, 146, 145, .12) 0 1px 18px 0;
+}
+
 .mycard-img{
     border-radius: 10px;
 }
@@ -70,12 +75,17 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 2rem;
 }
 
-.index-link{
+.index-link a{
     text-decoration: none;
-    float: right;
+    font-size: 14px;
+    margin-right: 2rem;
+    transform: translateY(50%);
 }
+
+
 
 .brief{
     font-size: 14px;
@@ -83,4 +93,10 @@ body{
 
 .dropdown{
     margin-right: 0.7rem;
+}
+
+.index-heading{
+    font-size: 20px;
+    font-weight: 600;
+    padding-left: 2rem;
 }

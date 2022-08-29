@@ -220,7 +220,7 @@ app.post("/albums/new", ensureLogin, upload.single("albumCover"), (req, res) => 
 })
 
 
-app.get("/genres", (req, res) => {
+app.get("/genres/update", (req, res) => {
   musicService.getGenres().then((genres) => {
     res.render('genres', {
       data: genres,
@@ -237,7 +237,7 @@ app.get("/genres/new", ensureLogin, (req, res) => {
 
 app.post("/genres/new", ensureLogin, (req, res) => {
   musicService.addGenre(req.body).then(() => {
-    res.redirect('/genres')
+    res.redirect('/genres/update')
   }).catch((err) => {
     res.status(500).send(err)
   })
@@ -245,7 +245,7 @@ app.post("/genres/new", ensureLogin, (req, res) => {
 
 app.get('/genres/delete/:id', ensureLogin, (req, res) => {
   musicService.deleteGenre(req.params.id).then(() => {
-    res.redirect('/genres')
+    res.redirect('/genres/update')
   }).catch((err) => {
     res.status(500).send("ERROR - GENRE DELETE FAILURE")
   })
@@ -399,12 +399,12 @@ app.get('/news', async (req, res) => {
 
 // Renders "Add news" view
 //, ensureLogin
-app.get('/news/add', (req,res) => {
+app.get('/news/new', (req,res) => {
   res.render('addNews')
 });
 
 //, ensureLogin
-app.post('/news/add', upload.single('featureImage'), (req,res) => {
+app.post('/news/new', upload.single('featureImage'), (req,res) => {
   if(req.file){
       let streamUpload = (req) => {
           return new Promise((resolve, reject) => {
@@ -445,13 +445,37 @@ app.post('/news/add', upload.single('featureImage'), (req,res) => {
 
 //Deletes news by ID
 app.get('/news/delete/:id', ensureLogin, (req,res) => {
-  newsService.deleteNewsById(req.params.id).then(()=>res.redirect('/news'))
+  newsService.deleteNewsById(req.params.id).then(()=>res.redirect('/news/update'))
   .catch((error) => res.status(500).send('Unable to Remove News / News not found'));
 });
 
 
 app.get("/loginHistory", ensureLogin, (req, res) => {
   res.render('loginHistory')
+})
+
+app.get("/news/update", ensureLogin, (req, res) => {
+  newsService.getAllNews().then((news) => {
+    res.render('updateNews', { data: news })
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+app.get("/songs/update", ensureLogin, (req, res) => {
+  musicService.getAllSongs().then((songs) => {
+    res.render('updateSongs', { data: songs })
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+app.get("/albums/update", ensureLogin, (req, res) => {
+  musicService.getAlbums().then((albums) => {
+    res.render('updateAlbums', { data: albums })
+  }).catch((err) => {
+    console.log(err)
+  })
 })
 
 app.get("/logout", ensureLogin, (req,res) => {

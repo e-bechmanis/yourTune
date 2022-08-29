@@ -46,7 +46,7 @@ var Genre = sequelize.define('Genre', {
 })
 
 Song.belongsTo(Album, {foreignKey: 'albumID'})
-Album.belongsTo(Genre, {foreignKey: 'genreID'})
+Album.belongsTo(Genre, {foreignKey: 'genre'})
 
 
 module.exports.initialize = () => {
@@ -87,11 +87,11 @@ module.exports.getAlbumById = (albumID) => {
     })
 }
 
-module.exports.getAlbumsByGenre = (genreID) => {
+module.exports.getAlbumsByGenre = (genre) => {
     return new Promise((resolve, reject) => {
         Album.findAll({
           where: {
-            genreID: genreID
+            genre: genre
           }
         }).then((data) => {
           resolve(data)
@@ -191,6 +191,17 @@ module.exports.getSongs = (albumID) => {
           albumID: albumID
         }
       }).then((data) => {
+        resolve(data)
+      }).catch((err) => {
+        console.log(err)
+        reject("Songs not available")
+      })
+  })
+}
+
+module.exports.getAllSongs = () => {
+  return new Promise((resolve, reject) => {
+      Song.findAll().then((data) => {
         resolve(data)
       }).catch((err) => {
         console.log(err)

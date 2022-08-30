@@ -74,8 +74,9 @@ body{
 .cards-row{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-bottom: 2rem;
+    flex-wrap: wrap;
 }
 
 .index-link a{
@@ -120,3 +121,20 @@ body {
     padding-left: 2rem;
     padding-right: 2rem;
 }
+
+.songs{
+    background: #fffbfb;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    padding-left: 5rem;
+}
+
+audio::-webkit-media-controls-panel {
+    background: #faf3ed;
+}
+
+.my-card{
+    box-shadow: rgba(142, 146, 145, 0.2) 0 3px 5px -1px,rgba(142, 146, 145, .14) 0 6px 10px 0,rgba(142, 146, 145, .12) 0 1px 18px 0;
+}
+
+

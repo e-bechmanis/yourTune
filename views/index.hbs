@@ -82,15 +82,24 @@
       <br>
       </div>
 </section>
-      <aside class="col-md-3 float-end">
+      <aside class="col-md-3 float-end news">
         
         {{#if data.allnews}}
-          <div class="news-side"><h5>Music news</h5></div>
+          <h5>Music news</h5>
             <ul class="list-group">
               {{#each data.allnews}}
                 <a href="/news/{{id}}" class="list-group-item list-group-item-action">{{title}}<div class="text-muted brief">{{brief}}</div></a>
               {{/each}}
             </ul>
+        {{/if}}
+      </aside>
+
+      <aside class="col-md-3 float-end genres">
+        {{#if data.genres}}
+            <h5>Featured genres</h5>
+              {{#each data.genres}}
+                <a href="/albums?genre={{genreID}}"><span class="badge text-bg-secondary">{{genre}}</span></a>
+              {{/each}}
         {{/if}}
       </aside>
 </div>

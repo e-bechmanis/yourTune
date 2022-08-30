@@ -85,7 +85,16 @@ body{
     transform: translateY(50%);
 }
 
+.genres{
+    margin-top: 1rem;
+    padding: 1rem;
+    line-height: 1.5rem;
+}
 
+.genres h5, .news h5{
+    font-weight: 600;
+    text-align: center;
+}
 
 .brief{
     font-size: 14px;
@@ -99,4 +108,15 @@ body{
     font-size: 20px;
     font-weight: 600;
     padding-left: 2rem;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.my-footer{
+    background: linear-gradient(135deg, #fefefe 0%, #dcdcdc 100%);
+    padding-left: 2rem;
+    padding-right: 2rem;
 }

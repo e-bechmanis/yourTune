@@ -123,7 +123,39 @@ app.get("/home", async (req, res) => {
     res.render('index', {
       data: viewData
  })
- })
+})
+
+app.get("/news/update", ensureLogin, (req, res) => {
+  newsService.getAllNews().then((news) => {
+    res.render('updateNews', { data: news })
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+//Returns a single news by ID
+app.get('/news/:id', async (req,res) => {
+  // Declare an object to store properties for the view
+  let viewData = {};
+  try{
+      // declare empty array to hold "news" objects
+      let allnews = [];
+      allnews = await newsService.getAllNews();
+      // sort the news by newsDate
+      allnews.sort((a,b) => new Date(b.newsDate) - new Date(a.newsDate));
+      viewData.allnews = allnews;
+    } catch(err){
+      viewData.message = 'no results';
+    }
+  try{
+      // Obtain the post by "id"
+      viewData.news = await newsService.getNewsById(req.params.id);
+  }catch(err){
+      viewData.message = 'no results'; 
+  }
+  // render the "blog" view with all of the data (viewData)
+  res.render('news', {data: viewData});
+});
 
 app.get("/albums/new", ensureLogin, (req, res) => {
   musicService.getGenres().then((genres) => {
@@ -157,12 +189,28 @@ app.get("/albums", (req, res) => {
   }
 })
 
+app.get("/podcasts", (req, res) => {
+  musicService.getAlbumsByGenre(7).then((genreAlbumsData) => {
+    res.render('albums', { data: genreAlbumsData })
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
 app.get("/albums/new", ensureLogin, (req, res) => {
   musicService.getGenres().then((genres) => {
     res.render('albumForm', {
       data: genres,
       layout: 'main'
     })
+  })
+})
+
+app.get("/albums/update", ensureLogin, (req, res) => {
+  musicService.getAlbums().then((albums) => {
+    res.render('updateAlbums', { data: albums })
+  }).catch((err) => {
+    console.log(err)
   })
 })
 
@@ -312,15 +360,34 @@ app.post("/songs/new", ensureLogin, upload.single("songFile"), (req, res) => {
   }
 })
 
-app.get("/songs/:id", ensureLogin, (req, res) => {
-  musicService.getSongs(req.params.id).then((songs) => {
-    res.render('songs', {
-      data: songs,
-      layout: 'main'
-    })
+app.get("/songs/update", ensureLogin, (req, res) => {
+  musicService.getAllSongs().then((songs) => {
+    res.render('updateSongs', { data: songs })
   }).catch((err) => {
     console.log(err)
   })
+})
+
+app.get("/songs/:id", ensureLogin, async (req, res) => {
+  let viewData = {};
+  try{
+    // declare empty array to hold "songs" objects
+    let songs = [];
+    songs = await musicService.getSongs(req.params.id);
+    viewData.songs = songs;
+  }catch(err){
+    viewData.message = 'no results';
+  }
+  try{
+    let album;
+    album = await musicService.getAlbumById(req.params.id);
+    viewData.album = album[0];
+  }catch(err){
+    viewData.albumMessage = 'no results';
+  }
+  // render the songs view with all of the data (viewData)
+  console.log(viewData.album);
+  res.render('songs', {data: viewData});
 })
 
 app.get('/songs/delete/:id', ensureLogin, (req, res) => {
@@ -454,30 +521,6 @@ app.get("/loginHistory", ensureLogin, (req, res) => {
   res.render('loginHistory')
 })
 
-app.get("/news/update", ensureLogin, (req, res) => {
-  newsService.getAllNews().then((news) => {
-    res.render('updateNews', { data: news })
-  }).catch((err) => {
-    console.log(err)
-  })
-})
-
-app.get("/songs/update", ensureLogin, (req, res) => {
-  musicService.getAllSongs().then((songs) => {
-    res.render('updateSongs', { data: songs })
-  }).catch((err) => {
-    console.log(err)
-  })
-})
-
-app.get("/albums/update", ensureLogin, (req, res) => {
-  musicService.getAlbums().then((albums) => {
-    res.render('updateAlbums', { data: albums })
-  }).catch((err) => {
-    console.log(err)
-  })
-})
-
 app.get("/logout", ensureLogin, (req,res) => {
   req.session.reset()
   res.redirect("/login")
@@ -489,7 +532,6 @@ app.use((req, res) => {
     layout: 'main'
   })
 })
-
 
 musicService.initialize()
 .then(userService.initialize())

@@ -1,33 +1,31 @@
-<div class="container">
-  </br>
-  <div class="row">
-    {{#if session.user}}
-    <a href="/albums/new" class="btn btn-light">Add Album</a>
-    {{/if}}
-    {{#each data}}
-    <div class="col-sm-3">
-      </br>
-      <div class="card">
-        <img src="{{albumCover}}" class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title">{{title}}</h5>
-          <h6 class="card-title">{{artist}}</h6>
-          <p class="card-text">{{year}}</p>
-          <a href="/songs/{{albumID}}" class="btn btn-primary">Songs</a>
-          {{#if genre}}
-          <a href="/albums?genre={{genreID}}" class="btn btn-warning">{{genreID}}</a>
-          {{/if}}
-          <a href="/albums/delete/{{albumID}}" class="btn btn-danger">Delete</a>
 
-          {{!-- <a href="/music/stronger.mp3" class="btn btn-success">Play</a> --}}
+<div class="container">
+    <br>
+        <div class="cards-row">
+            {{#each data}}
+              <div class="mycard">
+                <img src="{{albumCover}}" class="mycard-img" width="200px">
+                  <div class="card-body">
+                      <div class="line1">{{title}}</div>
+                      <div class="line2">{{artist}}</div>
+                      <div class="line3">{{year}}</div>
+                        <div class="mycard-footer">
+                            <a href="/songs/{{albumID}}" class="btn btn-outline-secondary btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                              <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                                </svg> Songs
+                            </a>
+                              {{#if genre}}
+                                <a href="/albums?genre={{genreID}}" class="btn btn-secondary btn-sm">{{genre}}</a>
+                              {{/if}}
+                          </div>
+                    </div>
+                </div>            
+            {{/each}}
+
+            {{#unless data}}
+              <div class="col-md-12 text-center">
+                <strong>NO RESULTS</strong>
+              </div>
+            {{/unless}}
         </div>
-      </div>
-    </div>
-    {{/each}}
-  </div>
-  {{#unless data}}
-      <div class="col-md-12 text-center">
-        <strong>NO RESULTS</strong>
-    </div>
-  {{/unless}}
 </div>

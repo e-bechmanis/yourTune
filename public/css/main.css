@@ -137,4 +137,13 @@ audio::-webkit-media-controls-panel {
     box-shadow: rgba(142, 146, 145, 0.2) 0 3px 5px -1px,rgba(142, 146, 145, .14) 0 6px 10px 0,rgba(142, 146, 145, .12) 0 1px 18px 0;
 }
 
+.login{
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.bold-text{
+    font-weight: 600;
+}
 

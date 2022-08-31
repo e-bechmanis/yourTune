@@ -125,6 +125,50 @@ app.get("/home", async (req, res) => {
  })
 })
 
+// Renders "Add news" view
+app.get('/news/new', (req,res) => {
+  res.render('addNews')
+});
+
+app.post('/news/new', upload.single('featureImage'), (req,res) => {
+  if(req.file){
+      let streamUpload = (req) => {
+          return new Promise((resolve, reject) => {
+              let stream = cloudinary.uploader.upload_stream(
+                  (error, result) => {
+                      if (result) {
+                          resolve(result);
+                      } else {
+                          reject(error);
+                      }
+                  }
+              );
+  
+  streamifier.createReadStream(req.file.buffer).pipe(stream);
+          });
+      };
+  
+      async function upload(req) {
+          let result = await streamUpload(req);
+          console.log(result);
+          return result;
+      }
+  
+      upload(req).then((uploaded)=>{
+  processNews(uploaded.url);
+      });
+  }else{
+  processNews("");
+  }
+  
+  function processNews(imageUrl){
+  req.body.featureImage = imageUrl;
+
+  // Process the req.body and add it as a new News before redirecting to /news
+  newsService.addNews(req.body).then(()=>res.redirect('/news'));
+  }     
+});
+
 app.get("/news/update", ensureLogin, (req, res) => {
   newsService.getAllNews().then((news) => {
     res.render('updateNews', { data: news })
@@ -462,52 +506,6 @@ app.get('/news', async (req, res) => {
   }
   // render the "news" view with all of the data (viewData)
   res.render('news', {data: viewData})
-});
-
-// Renders "Add news" view
-//, ensureLogin
-app.get('/news/new', (req,res) => {
-  res.render('addNews')
-});
-
-//, ensureLogin
-app.post('/news/new', upload.single('featureImage'), (req,res) => {
-  if(req.file){
-      let streamUpload = (req) => {
-          return new Promise((resolve, reject) => {
-              let stream = cloudinary.uploader.upload_stream(
-                  (error, result) => {
-                      if (result) {
-                          resolve(result);
-                      } else {
-                          reject(error);
-                      }
-                  }
-              );
-  
-  streamifier.createReadStream(req.file.buffer).pipe(stream);
-          });
-      };
-  
-      async function upload(req) {
-          let result = await streamUpload(req);
-          console.log(result);
-          return result;
-      }
-  
-      upload(req).then((uploaded)=>{
-  processNews(uploaded.url);
-      });
-  }else{
-  processNews("");
-  }
-  
-  function processNews(imageUrl){
-  req.body.featureImage = imageUrl;
-
-  // Process the req.body and add it as a new News before redirecting to /news
-  newsService.addNews(req.body).then(()=>res.redirect('/news'));
-  }     
 });
 
 //Deletes news by ID

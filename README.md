@@ -1,9 +1,18 @@
 # Find Your Tune
 
 ## About
-Find Your Tune is a full stack web application that allows a registered user to browse music collection and listen to songs or podcasts. I build it to practice back-end development skills. The goal was to build a simple music app (something like Apple Music or Spotify) to the best of my current level of programming skills.
+Find Your Tune is a full stack web application that allows a registered user to browse music collection and listen to songs or podcasts. I build it from scratch to practice back-end development skills. The goal was to build a simple music app (something like Apple Music or Spotify) to the best of my current level of programming skills.
 
 I later on added a separate news module to enhance user experience and add additional entertainment feature.
+
+### Main layout
+<img title="Main layout" src="./public/desc/find-your-tune.jpg" alt="layout" width="550"/><br><br>
+### Songs layout
+<img title="Songs" src="./public/desc/Songs.jpg" alt="songs layout" width="550"/><br><br>
+### Layout for data management
+<img title="Manage data" src="./public/desc/find-your-tune-data-manage.jpg" alt="data management layout" width="550"/><br><br>
+### Menu for data management
+<img title="Menu" src="./public/desc/update-menu.jpg" alt="songs layout" width="200"/><br><br>
 
 ## Key Features:
 

@@ -1,13 +1,13 @@
 {
   "name": "notify",
   "version": "1.0.0",
-  "description": "",
+  "description": "Find Your Tune App",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Elena Bechmanis",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

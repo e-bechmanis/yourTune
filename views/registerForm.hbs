@@ -1,5 +1,5 @@
-<div class="container">
-  {{#if errorMessage}} 
+<div class="container login">
+  {{#if errorMessage}}
     <div class="alert alert-danger" role="alert">
       <strong>ERROR: </strong>
       {{errorMessage}}
@@ -10,18 +10,16 @@
   <form action="/register" method="POST">
     </br>
     <fieldset>
-      <legend>Register New User</legend>
+      <legend class="text-danger bold-text">Register New User</legend>
       <div class="form-group">
-        <label for="username">Username</label>
         <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
       </div>
+      </br>
       <div class="form-group">
-        <label for="email">Email</label>
         <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
       </div>
       </br>
       <div class="form-group">
-        <label for="password">Password</label>
         <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
       </div>
       </br>
@@ -29,7 +27,7 @@
         <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm password">
       </div>
       </br>
-      <button type="submit" class="btn btn-primary">Add New User</button>
+      <button type="submit" class="btn btn-warning float-end">Add New User</button>
     </fieldset>
   </form>
   {{else}}

@@ -1,14 +1,16 @@
-<div class="container">
+<div class="container login">
   <form action="/genres/new" method="POST">
     </br>
     <fieldset>
-      <legend>New Genre</legend>
-      <div class="form-group">
-        <label for="genre">Genre</label>
-        <input type="text" class="form-control" id="genre" name="genre" placeholder="Enter genre">
+      <legend class="text-danger bold-text">New Genre</legend>
+      <div class="row mb-3">
+        <label for="genre" class="col-sm-2 col-form-label">Genre</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="genre" name="genre" placeholder="Enter genre">
+        </div>
       </div>
       </br>
-      <button type="submit" class="btn btn-primary">Add Genre</button>
+      <button type="submit" class="btn btn-warning float-end">Add Genre</button>
     </fieldset>
   </form>
 </div>

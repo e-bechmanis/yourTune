@@ -5,6 +5,9 @@ Find Your Tune is a full stack web application that allows a registered user to 
 
 I later on added a separate news module to enhance user experience and add additional entertainment feature.
 
+## 💫 Example Live Site
+This web app is deployed at [find-your-tune.com](http://find-your-tune.herokuapp.com/home) 
+
 ### Main layout
 <img title="Main layout" src="./public/desc/find-your-tune.jpg" alt="layout" width="550"/><br><br>
 ### Songs layout

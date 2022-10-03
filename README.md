@@ -19,9 +19,9 @@ This web app is deployed at [find-your-tune.com](http://find-your-tune.herokuapp
 
 ## Key Features:
 
-*  Built using Node/Express for the back-end
+*  CRUD app built using Node/Express on the back-end
 *  Built interface using Handlebars view engine to render data visually in the browser using .hbs views and layouts
-*  Used a combination of Bootstrap and customs CSS to style the app
+*  Used a combination of Bootstrap and custom CSS to style the app
 *  Image/sound files are stored at Cloudinary
 *  Postgres database on the server to store all the data added by user
 *  Client Sessions and data persistence using MongoDB to add user registration and Login/Logout functionality & tracking (logging)
